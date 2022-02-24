@@ -3,6 +3,7 @@ import express from 'express';
 
 const router = express.Router();
 
+//user
 router.post('/user', createUser);
 router.get('/user/:id', viewUser);
 router.get('/user', viewUsers);
@@ -11,7 +12,7 @@ router.delete('/user/:id', deleteUser)
 router.patch('/user/:id', editUser);
 
 
-
+//category
 router.post('/user/:id/category', createCategory);
 router.delete('/category/:id', deleteCategory);
 router.patch('/category/:id', editCategory);

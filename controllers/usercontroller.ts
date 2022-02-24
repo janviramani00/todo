@@ -216,8 +216,8 @@ export const getCategory = async (req: any, res: any) => {
         const { id } = req.params;
         const user = await getConnection()
                 .createQueryBuilder()
-                .select('user')
-                .from(Category, "user")
+                .select('category')
+                .from(Category, "category")
                 .where("user.id = :id", { id: id })
                 .getOne();
         //.getMany();
@@ -228,8 +228,8 @@ export const getCategory = async (req: any, res: any) => {
 export const getCategories = async (req: any, res: any) => {
         const user = await getConnection()
                 .createQueryBuilder()
-                .select('user')
-                .from(Category, "user")
+                .select('category')
+                .from(Category, "category")
 
                 .getMany();
 
