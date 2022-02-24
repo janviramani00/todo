@@ -1,5 +1,5 @@
 import { User } from '../entity/user';
-import {  getConnection, createQueryBuilder } from 'typeorm'; 
+import {  getConnection, createQueryBuilder, getCustomRepository, getManager } from 'typeorm'; 
 
 //create user
 export const createUser =  async (req: any, res:any) => {
@@ -89,3 +89,23 @@ export const deleteUser = async (req: any, res: any) => {
 
 	return res.json(response);
 }
+
+//edit user
+
+export const editUser = async (req: any, res: any) => {
+       
+        const {} = req.body;
+
+	const { id } = req.params;
+
+	      const user = await getConnection()
+	      .createQueryBuilder()
+	      .update(User)
+	      .set(req.body)
+	      
+	      .where("id = :id", {id: id})
+	      .execute();
+
+	      return res.json(user);
+         
+} 
