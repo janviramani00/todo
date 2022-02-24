@@ -2,6 +2,7 @@ import { User } from './entity/user';
 import  express from 'express';
 import { Router } from './routes/router'
 import { createConnection } from 'typeorm';
+import { Category } from './entity/category';
 
 const app = express();
 
@@ -15,7 +16,7 @@ const main = async () => {
                         username: "root",
                         password: "9512760660",
                         database: "todo",
-                        entities: [User],
+                        entities: [User, Category],
 			synchronize: true,
 			
 		});

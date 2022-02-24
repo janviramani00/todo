@@ -3,8 +3,11 @@ import {
 	PrimaryGeneratedColumn,
 	Column,
 	BaseEntity,
-        Index
+        Index,
+        OneToMany
 } from 'typeorm';
+
+import { Category } from '../entity/category'
 
 export enum Status {
         BACKlOG = 'Backlog',
@@ -12,7 +15,9 @@ export enum Status {
         DONE = 'Done'
 }
 
-@Entity()
+
+
+@Entity('user')
 export class User extends BaseEntity{
         @PrimaryGeneratedColumn()
 	id: number;
@@ -34,11 +39,24 @@ export class User extends BaseEntity{
 	Status: string;
 
         @Column({
+                nullable: true
+        })
+         C_Status : string;
+
+        @Column({
                 type: 'datetime',
                 default: () => 'NOW()',
         })
         @Index()
 	Date: string;
+
+        
+
+        @OneToMany(
+		() => Category,
+		(categories) => categories.user
+	)
+	category: Category[];
 
 
 }
