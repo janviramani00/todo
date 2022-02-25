@@ -46,6 +46,7 @@ export class User extends BaseEntity{
         @Column({
                 type: 'datetime',
                 default: () => 'NOW()',
+               
         })
         @Index()
 	Date: string;

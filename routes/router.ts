@@ -20,4 +20,5 @@ router.get('/categories', getCategories);
 router.get('/category/:id', getCategory);
 
 
+
 export { router as Router}

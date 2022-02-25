@@ -1,5 +1,5 @@
 import { User } from '../entity/user';
-import { getConnection, createQueryBuilder, getCustomRepository, getManager } from 'typeorm';
+import { getConnection, createQueryBuilder, getCustomRepository, getManager, QueryBuilder } from 'typeorm';
 import { categories } from '../entity/category';
 import { Category } from '../entity/category';
 
@@ -135,11 +135,11 @@ export const createCategory = async (req: any, res: any) => {
 
         if (category === Home || category === Maintain || category === Time) {
                 user.C_Status = "available";
-                
+
         }
         else {
-               user.C_Status = "not available";
-               
+                user.C_Status = "not available";
+
         }
 
         const add = await Category.create({
@@ -153,7 +153,7 @@ export const createCategory = async (req: any, res: any) => {
 
         await user.save();
 
-         return res.json(user);
+        return res.json(user);
 };
 
 //delete category
@@ -183,8 +183,7 @@ export const editCategory = async (req: any, res: any) => {
 
         if (!users) { return res.json({ msg: 'user not found' }) }
 
-        const { Home, Maintain, Time } = categories;
-
+       
 
         
 
@@ -193,21 +192,28 @@ export const editCategory = async (req: any, res: any) => {
                 .update(Category)
                 .set(req.body)
 
-                .where("id = :id", { id: id })
+                .where("userId = :userId", { userId: id })
                 .execute();
 
-        const update = req.body;
-        if (update === Home || Maintain || Time){
-                users.C_Status = "available";
-       }else{
-               users.C_Status = "not available";
-       }
+        const {update} = req.body;
+
+        const { Home, Maintain, Time } = categories;
+
+        if (update === Home || update === Maintain || update === Time) {
+                users.C_Status = " available";
+
+        }
+        else {
+                users.C_Status = "not available";
+
+        }
 
         await users.save()
 
         return res.json(user);
 
 }
+
 
 //get category
 
